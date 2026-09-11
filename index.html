@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chandan Prajapati — Senior Data Analyst</title>
+<meta name="description" content="Chandan Prajapati builds dashboards from scratch, SQL to screen: 30 dashboards on 295 SQL-backed endpoints for finance, ops and growth. Every number drills down to the transactions behind it.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chandan Prajapati — Senior Data Analyst">
+<meta property="og:description" content="Dashboards built from scratch. Numbers that tie out.">
+<meta name="theme-color" content="#08090b">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;family=Instrument+Serif:ital@1&amp;display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+    document.documentElement.classList.add('js');
+  })();
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 10 5 5 5-5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 7V6a2 2 0 0 1 2-2h10M16 13.5h.01"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+    <symbol id="i-mega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l7 4V6l-7 4z"/><path d="M18 9a4 4 0 0 1 0 6"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V17M8 7.5v.01M12 17v-3.5a2.5 2.5 0 0 1 5 0V17M12 10.5V17"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="backdrop" aria-hidden="true"><div class="glow"></div><div class="grid"></div></div>
+<div class="noise" aria-hidden="true"></div>
+
+<header class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Chandan Prajapati, back to top">
+      <span class="brand-mark"><svg viewBox="0 0 16 16" fill="#fff" aria-hidden="true"><rect x="2" y="8.5" width="3" height="5.5" rx="1" opacity=".6"/><rect x="6.5" y="5.5" width="3" height="8.5" rx="1" opacity=".8"/><rect x="11" y="2" width="3" height="12" rx="1"/></svg></span>
+      <span class="brand-name">Chandan Prajapati</span>
+    </a>
+    <div class="nav-links">
+      <span class="nav-hl" aria-hidden="true"></span>
+      <a href="#work">Work</a>
+      <a href="#platform">Platform</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="search-btn" type="button" data-cmdk aria-label="Open command menu"><svg width="14" height="14"><use href="#i-search"/></svg><span class="lbl">Search</span><kbd class="kbd-mod">⌘K</kbd></button>
+      <button class="icon-btn theme-btn" type="button" aria-label="Switch theme"><svg class="sun" width="16" height="16"><use href="#i-sun"/></svg><svg class="moon" width="16" height="16"><use href="#i-moon"/></svg></button>
+      <a class="btn btn-sm btn-primary" href="resume.html">Resume</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- ================= Hero ================= -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <a class="pill enter" style="--d:.05s" href="#work"><span class="dot-live"></span>Building Badho's analytics platform<span class="pill-cta">See the work <svg class="arr" width="13" height="13"><use href="#i-arrow"/></svg></span></a>
+      <h1 class="display">
+        <span class="w" style="--i:0">Dashboards</span> <span class="w" style="--i:1">built</span> <span class="w" style="--i:2">from</span> <span class="w" style="--i:3">scratch.</span>
+        <span class="w" style="--i:4">Numbers</span> <span class="w" style="--i:5">that</span> <em class="w" style="--i:6">tie out.</em>
+      </h1>
+      <p class="lede enter" style="--d:.55s">I'm Chandan Prajapati, Senior Data Analyst at Badho, a B2B FMCG marketplace. I build its analytics platform end to end, SQL to screen: <b>30 dashboards on 295 SQL-backed endpoints</b>, and every figure drills down to the transactions behind it.</p>
+      <div class="cta-row enter" style="--d:.65s">
+        <a class="btn btn-primary" href="#work">See the work <svg class="arr" width="15" height="15"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="resume.html">Resume</a>
+        <button class="btn btn-ghost" type="button" data-cmdk><kbd class="kbd-mod">⌘K</kbd> Jump anywhere</button>
+      </div>
+    </div>
+
+    <!-- Interactive dashboard window (illustrative data) -->
+    <div class="wrap shot-stage enter" style="--d:.8s">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="shot" role="region" aria-label="Interactive dashboard preview, illustrative data">
+        <div class="win-bar">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="url"><svg><use href="#i-lock"/></svg>Analytics / P&amp;L Statement</span>
+          <span class="chip">Illustrative data</span>
+        </div>
+        <div class="win-body">
+          <aside class="side" aria-label="Dashboard navigation (preview)">
+            <div class="ws"><span class="ws-icon"></span>Badho Analytics<svg><use href="#i-chev"/></svg></div>
+            <button class="side-search" type="button" data-cmdk><span>Search…</span><kbd class="kbd-mod">⌘K</kbd></button>
+            <p class="side-label">Finance</p>
+            <button class="side-item is-active" type="button" data-case="pnl"><svg><use href="#i-file"/></svg>P&amp;L Statement</button>
+            <button class="side-item" type="button" data-case="cod"><svg><use href="#i-wallet"/></svg>COD Remittance</button>
+            <button class="side-item" type="button" data-case="refund"><svg><use href="#i-undo"/></svg>Refunds &amp; Fraud</button>
+            <button class="side-item" type="button" data-case="ledger"><svg><use href="#i-layers"/></svg>Ledger Pools</button>
+            <p class="side-label">Ops &amp; Growth</p>
+            <button class="side-item" type="button" data-case="orders"><svg><use href="#i-truck"/></svg>Delivery TAT</button>
+            <button class="side-item" type="button" data-case="campaign"><svg><use href="#i-mega"/></svg>Campaigns</button>
+            <button class="side-item" type="button" data-case="qps"><svg><use href="#i-award"/></svg>Loyalty Scheme</button>
+            <div class="side-user"><span class="avatar">CP</span>Chandan P.</div>
+          </aside>
+
+          <div class="main">
+            <div class="main-head">
+              <div>
+                <h2 class="main-title">P&amp;L Statement</h2>
+                <p class="main-sub">Last 30 days · <span class="basis-label">by order date</span> · IST</p>
+              </div>
+              <div class="main-tools">
+                <div class="seg seg-sm" role="group" aria-label="Date basis">
+                  <span class="seg-hl" aria-hidden="true"></span>
+                  <button type="button" data-basis="order" aria-pressed="true">Order</button>
+                  <button type="button" data-basis="delivery" aria-pressed="false">Delivery</button>
+                  <button type="button" data-basis="invoice" aria-pressed="false">Invoice</button>
+                </div>
+                <button class="btn btn-sm query-btn" type="button" aria-expanded="false" aria-controls="query-pop"><svg width="14" height="14"><use href="#i-code"/></svg>View query</button>
+              </div>
+            </div>
+
+            <div class="kpis" role="tablist" aria-label="Metric">
+              <button class="kpi-tab" role="tab" type="button" aria-selected="true" data-series="net"><span class="kpi-label">Net settlement</span><span class="kpi-val">₹18.6L</span><span class="kpi-delta good">▲ 4.2% <span>vs prior</span></span></button>
+              <button class="kpi-tab" role="tab" type="button" aria-selected="false" tabindex="-1" data-series="orders"><span class="kpi-label">Orders</span><span class="kpi-val">12,480</span><span class="kpi-delta good">▲ 3.1% <span>vs prior</span></span></button>
+              <button class="kpi-tab" role="tab" type="button" aria-selected="false" tabindex="-1" data-series="refund"><span class="kpi-label">Refund rate</span><span class="kpi-val">1.8%</span><span class="kpi-delta good">▼ 0.4 pt <span>vs prior</span></span></button>
+              <button class="kpi-tab" role="tab" type="button" aria-selected="false" tabindex="-1" data-series="cod"><span class="kpi-label">COD settled</span><span class="kpi-val">98.6%</span><span class="kpi-delta good">▲ 0.9 pt <span>vs prior</span></span></button>
+            </div>
+
+            <div class="chart" tabindex="0" role="img" aria-label="Daily trend for the selected metric. Use left and right arrow keys to read values."></div>
+            <p class="sr-only" aria-live="polite" id="chart-live"></p>
+
+            <div class="panes">
+              <div class="pane">
+                <div class="pane-head"><span class="l">Statement</span><span class="r">click a line to drill down</span></div>
+                <div class="stmt">
+                  <button class="stmt-row" type="button" data-case="pnl" data-line="paid"><span>Buyer paid</span><b>₹96.4L</b><svg><use href="#i-arrow"/></svg></button>
+                  <button class="stmt-row" type="button" data-case="pnl" data-line="payout"><span>Seller payout</span><b>−₹68.2L</b><svg><use href="#i-arrow"/></svg></button>
+                  <button class="stmt-row" type="button" data-case="pnl" data-line="disc"><span>Discounts</span><b>−₹4.1L</b><svg><use href="#i-arrow"/></svg></button>
+                  <button class="stmt-row" type="button" data-case="pnl" data-line="deliv"><span>Delivery</span><b>−₹3.6L</b><svg><use href="#i-arrow"/></svg></button>
+                  <button class="stmt-row" type="button" data-case="pnl" data-line="rto"><span>RTO</span><b>−₹1.9L</b><svg><use href="#i-arrow"/></svg></button>
+                  <button class="stmt-row total" type="button" data-case="pnl" data-line="net"><span>Net settlement</span><b>₹18.6L</b><svg><use href="#i-arrow"/></svg></button>
+                </div>
+              </div>
+              <div class="pane">
+                <div class="pane-head"><span class="l"><span class="dot-live"></span>Reconciliation</span><span class="r"><span class="feed-count">1,284</span> rows checked</span></div>
+                <ul class="feed" aria-label="Simulated reconciliation feed"></ul>
+              </div>
+            </div>
+
+            <div class="query-pop" id="query-pop" role="dialog" aria-label="SQL behind this view">
+              <header><span>SQL captured with this response</span><button class="btn btn-sm copy-sql" type="button"><svg width="13" height="13"><use href="#i-copy"/></svg>Copy</button></header>
+<pre><code><span class="tok-c">-- illustrative · session time zone: Asia/Kolkata</span>
+<span class="tok-k">SELECT</span> <span class="tok-f">date_trunc</span>(<span class="tok-s">'day'</span>, o.<span class="basis-col">ordered_at</span>) <span class="tok-k">AS</span> day,
+       <span class="tok-f">SUM</span>(o.buyer_paid)
+     - <span class="tok-f">SUM</span>(o.seller_payout + o.discounts
+           + o.delivery_cost + o.rto_cost) <span class="tok-k">AS</span> net
+<span class="tok-k">FROM</span>   orders o
+<span class="tok-k">WHERE</span>  o.<span class="basis-col">ordered_at</span> &gt;= $1
+  <span class="tok-k">AND</span>  o.<span class="basis-col">ordered_at</span> &lt;  $2
+<span class="tok-k">GROUP BY</span> 1 <span class="tok-k">ORDER BY</span> 1;</code></pre>
+              <footer>Every section of the real dashboards has this: query, parameters and a copy button.</footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <dl class="stats rv">
+        <div class="stat"><dt data-to="30">30</dt><dd><div class="lbl">dashboards, built from scratch</div><div class="how">one Next.js platform, first commit May 2026</div></dd></div>
+        <div class="stat"><dt data-to="295">295</dt><dd><div class="lbl">SQL-backed API endpoints</div><div class="how">counted from route files; 262 expose their SQL</div></dd></div>
+        <div class="stat"><dt data-to="2340">2,340</dt><dd><div class="lbl">commits in four months</div><div class="how">git log, 7 May → 11 Sep 2026</div></dd></div>
+        <div class="stat"><dt data-to="45">45</dt><dd><div class="lbl">people signed in to it</div><div class="how">counted from the sign-in allowlist</div></dd></div>
+        <div class="stat"><dt data-to="4985">4,985</dt><dd><div class="lbl">COD orders backfilled</div><div class="how">courier sheets matched order by order</div></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= How I work ================= -->
+  <section class="section" id="approach">
+    <div class="wrap">
+      <header class="sec-head">
+        <div class="rv">
+          <p class="eyebrow">How I work</p>
+          <h2 class="title">Dashboards finance can <em>sign off on.</em></h2>
+        </div>
+        <div class="rv" style="--d:.08s">
+          <p class="sec-sub">Since May 2026 I've built Badho's internal analytics platform end to end, with Claude Code as my pair programmer. Most of it sits where money moves: P&amp;L statements, courier COD remittances, refunds, funding pools and payouts.</p>
+          <p class="sec-sub">There, a report that's almost right is worse than no report. Before analytics I ran a 50-person operations team, so I build for the person who has to act on the number.</p>
+        </div>
+      </header>
+
+      <div class="bento">
+        <article class="card spot b-3 rv">
+          <div class="card-viz" aria-hidden="true">
+            <div class="mv-flow">
+              <div class="mv-code"><span>SELECT …</span><i class="l a"></i><i class="l" style="width:88%"></i><i class="l" style="width:60%"></i><i class="l" style="width:76%"></i></div>
+              <div class="mv-arrow"><i></i></div>
+              <div class="mv-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <h3>Built from scratch, SQL to screen</h3>
+            <p>No BI tool between me and the data. I write the query, the API route and the chart, so when a number looks wrong I can follow it all the way down.</p>
+          </div>
+        </article>
+
+        <article class="card spot b-3 rv" style="--d:.06s">
+          <div class="card-viz" aria-hidden="true">
+            <div class="mv-table">
+              <div><span>Discounts</span><b>₹4.1L</b></div>
+              <div class="hot"><span>Delivery</span><em class="mv-chip">1,284 orders ↗</em><b>₹3.6L</b></div>
+              <div><span>RTO</span><b>₹1.9L</b></div>
+              <div><span>Net settlement</span><b>₹18.6L</b></div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <h3>Every cell drills down</h3>
+            <p>A total is only as good as the orders behind it. Statement cells, pool balances, funnel stages and speed bands all open to the rows that make them up.</p>
+          </div>
+        </article>
+
+        <article class="card spot b-2 rv">
+          <div class="card-viz" aria-hidden="true">
+            <div class="mv-sql">
+              <header><span>&lt;/&gt; View query</span><span>Copy</span></header>
+<pre><span class="tok-k">SELECT</span> day, <span class="tok-f">SUM</span>(net)
+<span class="tok-k">FROM</span>   orders
+<span class="tok-k">WHERE</span>  day &gt;= $1
+<span class="tok-k">GROUP BY</span> day;</pre>
+            </div>
+          </div>
+          <div class="card-copy">
+            <h3>Show the query</h3>
+            <p>262 of 295 endpoints return the SQL that produced them, with its parameters and a copy button beside the chart.</p>
+          </div>
+        </article>
+
+        <article class="card spot b-2 rv" style="--d:.06s">
+          <div class="card-viz" aria-hidden="true">
+            <div class="mv-verdicts">
+              <div><i class="sh sh-ok"></i>will update<b>70</b></div>
+              <div><i class="sh sh-set"></i>already set<b>16</b></div>
+              <div><i class="sh sh-bad"></i>no match<b>4</b></div>
+              <span class="mv-apply">Apply 70 rows</span>
+            </div>
+          </div>
+          <div class="card-copy">
+            <h3>Preview before you write</h3>
+            <p>Anything that changes money runs as a preview first. Transfers post both sides in one transaction, and re-running changes nothing.</p>
+          </div>
+        </article>
+
+        <article class="card spot b-2 rv" style="--d:.12s">
+          <div class="card-viz" aria-hidden="true">
+            <div class="mv-log">
+              <div><span class="avatar">FN</span><span>approved payout PAY-48213</span><code>a41f2c9</code></div>
+              <div><span class="avatar">OP</span><span>applied remittance sheet</span><code>a41f2c9</code></div>
+              <div><span class="avatar">CP</span><span>transfer MASTER → COUPON</span><code>9be07d1</code></div>
+            </div>
+          </div>
+          <div class="card-copy">
+            <h3>Leave a trail</h3>
+            <p>Approvals, transfers and remittance writes are audit-logged: who, what and which build. "Who changed this?" always has an answer.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Selected work ================= -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <header class="sec-head">
+        <div class="rv">
+          <p class="eyebrow">Selected work</p>
+          <h2 class="title">Seven dashboards, <em>built from scratch.</em></h2>
+        </div>
+        <div class="rv" style="--d:.08s">
+          <p class="sec-sub">Scroll through them; each one takes its turn in the window. Open any to read how it was built and how it ties out.</p>
+        </div>
+      </header>
+
+      <div class="work-bar rv">
+        <div class="filters" role="group" aria-label="Filter by theme">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="finance" aria-pressed="false">Finance</button>
+          <button class="filter" type="button" data-filter="reconciliation" aria-pressed="false">Reconciliation</button>
+          <button class="filter" type="button" data-filter="controls" aria-pressed="false">Controls</button>
+          <button class="filter" type="button" data-filter="ops" aria-pressed="false">Ops</button>
+          <button class="filter" type="button" data-filter="growth" aria-pressed="false">Growth</button>
+        </div>
+        <div class="seg seg-view" role="group" aria-label="Layout">
+          <span class="seg-hl" aria-hidden="true"></span>
+          <button type="button" data-view="index" aria-pressed="true">Index</button>
+          <button type="button" data-view="cards" aria-pressed="false">Cards</button>
+        </div>
+      </div>
+      <p class="work-note rv">Charts use synthetic data. Business figures stay inside the company; counts (columns, routes, tabs) come from the codebase.</p>
+
+      <div class="work">
+        <div class="chapters">
+
+          <article class="chapter" id="p-pnl" data-id="pnl" data-themes="finance reconciliation" data-label="Finance · Reconciliation" data-kpi="26" data-kpi-label="statement columns">
+            <div class="ch-meta"><span class="ch-idx">01</span><span>Finance · Reconciliation</span></div>
+            <h3 class="ch-title">P&amp;L Statement &amp; Accounting</h3>
+            <div class="ch-viz" data-viz="pnl"></div>
+            <p class="ch-desc">A month-over-month profit-and-loss statement for every order: discounts, what the buyer owes and paid, what the seller is owed, commission and penalties, delivery and RTO costs, down to net P&amp;L. It runs on order, delivery or invoice date.</p>
+            <dl class="ch-metrics"><div><dt>26</dt><dd>statement columns, 8 derived</dd></div><div><dt>3</dt><dd>date bases to bucket by</dd></div><div><dt>23</dt><dd>API routes behind it</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Zoho Books API</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="pnl">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“A total is only as good as the orders behind it.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-cod" data-id="cod" data-themes="finance reconciliation controls" data-label="Finance · Reconciliation · Controls" data-kpi="4,985" data-kpi-label="orders backfilled">
+            <div class="ch-meta"><span class="ch-idx">02</span><span>Finance · Reconciliation · Controls</span></div>
+            <h3 class="ch-title">COD Remittance Reconciliation</h3>
+            <div class="ch-viz" data-viz="cod"></div>
+            <p class="ch-desc">Upload a courier's cash-on-delivery payment sheet. It's matched to orders, and each order is stamped with its settlement date and the amount actually paid. Every row is previewed before anything is written.</p>
+            <dl class="ch-metrics"><div><dt>5</dt><dd>verdicts per row, in preview</dd></div><div><dt>₹1</dt><dd>tolerance before a mismatch</dd></div><div><dt>2</dt><dd>courier formats auto-detected</dd></div></dl>
+            <div class="tags"><span class="tag">Next.js</span><span class="tag">PostgreSQL</span><span class="tag">Excel parsing</span><span class="tag">Transactions</span><span class="tag">Audit log</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="cod">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“Preview first. Write once. Re-running changes nothing.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-refund" data-id="refund" data-themes="controls finance" data-label="Controls · Finance" data-kpi="0–100" data-kpi-label="buyer risk score">
+            <div class="ch-meta"><span class="ch-idx">03</span><span>Controls · Finance</span></div>
+            <h3 class="ch-title">Refund &amp; Claim-Fraud Controls</h3>
+            <div class="ch-viz" data-viz="refund"></div>
+            <p class="ch-desc">Support looks up an order, sees a LOW / MEDIUM / HIGH risk rating and the buyer's claim history, corrects the delivered quantity, then approves a refund or a seller deduction. A companion view scores every buyer 0–100 on claim behaviour.</p>
+            <dl class="ch-metrics"><div><dt>60/25/15</dt><dd>score weights, published</dd></div><div><dt>6 + 3</dt><dd>orders and claims before any flag</dd></div><div><dt>10 min</dt><dd>to a Slack alert if unrefunded</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Slack webhooks</span><span class="tag">CSV / Excel export</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="refund">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“Flag the pattern, not the person. Evidence first.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-ledger" data-id="ledger" data-themes="finance controls" data-label="Finance · Controls" data-kpi="5" data-kpi-label="funding pools">
+            <div class="ch-meta"><span class="ch-idx">04</span><span>Finance · Controls</span></div>
+            <h3 class="ch-title">Ledger Pools &amp; Payout Approvals</h3>
+            <div class="ch-viz" data-viz="ledger"></div>
+            <p class="ch-desc">The platform funds coupons, commissions, delivery and returns from separate pools. This shows every rupee in and out of them by IST day, moves money between them safely, and approves payouts with a guard against double-processing.</p>
+            <dl class="ch-metrics"><div><dt>5</dt><dd>pools, coupon to master</dd></div><div><dt>1</dt><dd>transaction per transfer, both sides</dd></div><div><dt>0</dt><dd>processed payouts that can be flipped</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Transactions</span><span class="tag">Next.js</span><span class="tag">Audit log</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="ledger">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“Money moves in pairs, or it doesn't move.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-orders" data-id="orders" data-themes="ops" data-label="Ops · Delivery" data-kpi="p90" data-kpi-label="not the average">
+            <div class="ch-meta"><span class="ch-idx">05</span><span>Ops · Delivery</span></div>
+            <h3 class="ch-title">Order Dashboard &amp; Delivery TAT</h3>
+            <div class="ch-viz" data-viz="tat"></div>
+            <p class="ch-desc">The dashboard the platform started with. Nine tabs over every order, from the monthly GMV goal gauge and India maps to a Delivery TAT tab: p50 / p90 / p100 month over month, the p25–p75 range shaded, and six clickable speed bands.</p>
+            <dl class="ch-metrics"><div><dt>9</dt><dd>tabs over every order</dd></div><div><dt>6</dt><dd>speed bands, 0–3 to 15+ days</dd></div><div><dt>2</dt><dd>flows on one TAT panel</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Recharts</span><span class="tag">react-simple-maps</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="orders">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“One stuck parcel shouldn't hide inside an average.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-campaign" data-id="campaign" data-themes="growth" data-label="Growth · Attribution" data-kpi="7" data-kpi-label="funnel stages">
+            <div class="ch-meta"><span class="ch-idx">06</span><span>Growth · Attribution</span></div>
+            <h3 class="ch-title">Meta Campaign → First-Order Attribution</h3>
+            <div class="ch-viz" data-viz="funnel"></div>
+            <p class="ch-desc">Reads the campaign ID from each install's referrer and follows every Meta campaign through seven stages, from install to delivered order. Every campaign comes back in one query, cached for 30 minutes, and each stage opens the buyers in it.</p>
+            <dl class="ch-metrics"><div><dt>7</dt><dd>stages, install to delivered</dd></div><div><dt>1</dt><dd>query for every campaign</dd></div><div><dt>30 min</dt><dd>cache, so it stays fast</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Meta install referrer</span><span class="tag">Caching</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="campaign">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“Judge spend on retailers who order, not on installs.”</blockquote>
+          </article>
+
+          <article class="chapter" id="p-qps" data-id="qps" data-themes="growth" data-label="Growth · AI" data-kpi="25%" data-kpi-label="near-miss window">
+            <div class="ch-meta"><span class="ch-idx">07</span><span>Growth · AI</span></div>
+            <h3 class="ch-title">Loyalty Scheme Analytics + AI Analyst</h3>
+            <div class="ch-viz" data-viz="cohort"></div>
+            <p class="ch-desc">Tracks a tiered loyalty scheme end to end: who qualifies, who is within 25% of the next tier, and whether rewarded buyers keep ordering. A Claude-powered analyst answers questions in plain English from the dashboard's own numbers.</p>
+            <dl class="ch-metrics"><div><dt>25%</dt><dd>near-miss window to the next tier</dd></div><div><dt>5</dt><dd>tabs, 13 API routes</dd></div><div><dt>0</dt><dd>database queries by the model</dd></div></dl>
+            <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">Claude Haiku 4.5</span></div>
+            <div class="ch-actions"><button class="btn btn-sm" type="button" data-case="qps">Read the build notes <svg class="arr" width="14" height="14"><use href="#i-arrow"/></svg></button><span class="read-time"></span></div>
+            <blockquote class="ch-quote">“The model reads the dashboard. It doesn't get its own database.”</blockquote>
+          </article>
+
+        </div>
+
+        <div class="stage">
+          <div class="stage-win">
+            <div class="win-bar">
+              <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="stage-title">P&amp;L Statement &amp; Accounting</span>
+              <span class="stage-count">01 / 07</span>
+            </div>
+            <div class="stage-steps" role="group" aria-label="Jump to project"></div>
+            <div class="stage-body">
+              <div class="stage-item" data-for="pnl" data-viz="pnl"></div>
+              <div class="stage-item" data-for="cod" data-viz="cod"></div>
+              <div class="stage-item" data-for="refund" data-viz="refund"></div>
+              <div class="stage-item" data-for="ledger" data-viz="ledger"></div>
+              <div class="stage-item" data-for="orders" data-viz="tat"></div>
+              <div class="stage-item" data-for="campaign" data-viz="funnel"></div>
+              <div class="stage-item" data-for="qps" data-viz="cohort"></div>
+            </div>
+            <div class="stage-foot"><span>Illustrative data · hover the chart</span><span class="stage-kpi"><b>26</b>statement columns</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Platform ================= -->
+  <section class="section" id="platform">
+    <div class="wrap">
+      <header class="sec-head">
+        <div class="rv">
+          <p class="eyebrow">Platform</p>
+          <h2 class="title">The system under <em>thirty dashboards.</em></h2>
+        </div>
+        <div class="rv" style="--d:.08s">
+          <p class="sec-sub">How a number gets from the database to the screen, and why anyone can check it on the way.</p>
+        </div>
+      </header>
+
+      <div class="card diagram rv">
+        <div class="diagram-scroll">
+          <svg viewBox="0 0 1100 256" role="img" aria-label="Data flow: PostgreSQL, with every connection in IST, feeds SQL whose query and parameters travel with the result; an API route re-checks the sign-in allowlist on every call; the dashboard offers drill-down, View Query and CSV. Write actions go to an audit log recording who, what and which build.">
+            <path class="d-wire" d="M230 95 H300"/><path class="d-flow" d="M230 95 H300"/>
+            <path class="d-wire" d="M510 95 H580"/><path class="d-flow" d="M510 95 H580"/>
+            <path class="d-wire" d="M790 95 H860"/><path class="d-flow" d="M790 95 H860"/>
+            <path class="d-wire" d="M685 150 V186"/><path class="d-flow slow" d="M685 150 V186"/>
+            <g><rect class="d-node" x="20" y="40" width="210" height="110" rx="14"/><text class="d-tag" x="38" y="66">DATA</text><text class="d-title" x="38" y="90">PostgreSQL</text><text class="d-sub" x="38" y="112">Every connection runs</text><text class="d-sub" x="38" y="130">in IST (Asia/Kolkata)</text></g>
+            <g><rect class="d-node" x="300" y="40" width="210" height="110" rx="14"/><text class="d-tag" x="318" y="66">QUERY</text><text class="d-title" x="318" y="90">SQL, captured</text><text class="d-sub" x="318" y="112">Query and parameters</text><text class="d-sub" x="318" y="130">travel with the result</text></g>
+            <g><rect class="d-node" x="580" y="40" width="210" height="110" rx="14"/><text class="d-tag" x="598" y="66">API · 295 ROUTES</text><text class="d-title" x="598" y="90">API route</text><text class="d-sub" x="598" y="112">Google sign-in, allowlist</text><text class="d-sub" x="598" y="130">re-checked on every call</text></g>
+            <g><rect class="d-node hi" x="860" y="40" width="220" height="110" rx="14"/><text class="d-tag" x="878" y="66">UI · 30 DASHBOARDS</text><text class="d-title" x="878" y="90">Dashboard</text><text class="d-sub" x="878" y="112">Drill-down to rows,</text><text class="d-sub" x="878" y="130">View Query, CSV export</text></g>
+            <g><rect class="d-node" x="580" y="186" width="210" height="62" rx="12"/><text class="d-title" x="598" y="212" style="font-size:13px">Audit log</text><text class="d-sub" x="598" y="232">who · what · which build</text></g>
+          </svg>
+        </div>
+        <div class="diagram-cap"><span>262 of 295 endpoints capture their SQL</span><span>13 write routes audit-logged</span><span>45 allowlisted users</span></div>
+      </div>
+
+      <div class="more-grid">
+        <article class="card spot more rv">
+          <h3>View Query, everywhere</h3>
+          <p>Every section can show the SQL that produced it: the query, its parameters and a copy button, captured from the same call that fed the chart.</p>
+          <div class="m"><b>262 / 295</b><span>endpoints expose their SQL</span></div>
+        </article>
+        <article class="card spot more rv" style="--d:.05s">
+          <h3>Buyer lifecycle segments</h3>
+          <p>Retailers sorted into Power, Active, Priority, New, First-Time, Sporadic, Lapsed and Bounce-Back, across four city tiers, so re-engagement starts before churn.</p>
+          <div class="m"><b>8 × 4</b><span>segments × city tiers</span></div>
+        </article>
+        <article class="card spot more rv" style="--d:.1s">
+          <h3>JIT order funnel</h3>
+          <p>A same-day local-delivery slice with its own GMV target: a seven-stage fulfilment funnel with drill-downs, daily cart-value buckets and its own TAT view.</p>
+          <div class="m"><b>7</b><span>fulfilment stages</span></div>
+        </article>
+        <article class="card spot more rv">
+          <h3>Brand and margin suite</h3>
+          <p>Brand P&amp;L on an MRP basis, brand performance, side-by-side delivery-flow maps, and a daily-active-buyer → cart → order margin funnel.</p>
+          <div class="m"><b>42</b><span>API routes, 4 dashboards</span></div>
+        </article>
+        <article class="card spot more rv" style="--d:.05s">
+          <h3>The rest of the thirty</h3>
+          <p>Calling team, catalogue alerts, Delhi NCR, order placement, rejected and cancelled orders, PO changes, sales analytics, scheme price changes, wholesale, DaaS deliveries and more.</p>
+          <div class="m"><b>30</b><span>dashboards in total</span></div>
+        </article>
+        <article class="card spot more rv" style="--d:.1s">
+          <h3>Before the platform: Metabase and Retool</h3>
+          <p>Self-serve SKU performance, fill-rate, conversion-funnel and revenue-contribution dashboards, plus the KPI definitions distributor, retailer and brand teams share.</p>
+          <div class="m"><b>Self-serve</b><span>Metabase · Retool</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Experience ================= -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <header class="sec-head">
+        <div class="rv">
+          <p class="eyebrow">Experience</p>
+          <h2 class="title">Five years across <em>commerce and logistics.</em></h2>
+        </div>
+        <div class="rv" style="--d:.08s"><p class="sec-sub">3.5+ years of hands-on analytics; before that, product and operations.</p></div>
+      </header>
+
+      <div class="xp rv">
+        <div class="xp-side">
+          <div class="xp-org">Badho Technology</div>
+          <div class="xp-dates">Aug 2023 – Present</div>
+          <div class="xp-ctx">B2B FMCG e-commerce marketplace connecting brands, distributors and retailers</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Senior Data Analyst</h3>
+          <p class="xp-group">Revenue reporting &amp; reconciliation</p>
+          <ul>
+            <li>Built the <b>P&amp;L Statement &amp; Accounting</b> dashboard: a month-over-month settlement statement with <b>26 columns</b> on order, delivery or invoice-date basis; every cell drills down to the orders that sum to it.</li>
+            <li>Integrated <b>Zoho Books via REST API</b> (monthly P&amp;L, invoices) so the books can sit beside platform P&amp;L.</li>
+            <li>Automated <b>COD settlement reconciliation</b>: courier sheets matched to orders by AWB with an order-ID fallback, mismatches flagged before posting; <b>4,985 orders</b> backfilled.</li>
+            <li>Built <b>refund and claim controls</b>: risk-rated refund approvals, a published 0–100 buyer fraud score, and alerts for paid orders still unrefunded after 10 minutes.</li>
+            <li>Caught data defects before they reached reports: IST-safe day bucketing kept <b>3,787 ledger postings</b> off the wrong date.</li>
+          </ul>
+          <p class="xp-group">Reporting automation &amp; dashboards</p>
+          <ul>
+            <li>Shipped an in-house analytics platform: <b>30 dashboards on 295 SQL-backed API endpoints</b> (Next.js / TypeScript) for 45 signed-in users, covering revenue, GMV vs target, margins and delivery TAT.</li>
+            <li>Automated recurring reports with optimised SQL (CTEs, window functions, LATERAL joins), <b>cutting manual reporting by 70%+</b>; added "View Query" to 262 endpoints and audit-logged money-moving actions.</li>
+            <li>Built self-serve <b>Metabase and Retool</b> dashboards (SKU performance, fill rates, conversion funnels, revenue contribution) and standardised KPI definitions across distributor, retailer and brand.</li>
+          </ul>
+          <p class="xp-group">Business impact</p>
+          <ul>
+            <li>Lifted <b>order conversion by 30%</b> through funnel and root-cause analysis of stock, credit-limit and fulfilment-zone gaps.</li>
+            <li>Insights behind OKRs contributed to <b>14% order growth</b>, <b>26% more distributor onboarding</b> and <b>18% retailer activation</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp rv">
+        <div class="xp-side">
+          <div class="xp-org">Raaho Logisolutions</div>
+          <div class="xp-dates">Jan 2023 – Aug 2023</div>
+          <div class="xp-ctx">Logistics technology</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Assistant Product Manager</h3>
+          <ul>
+            <li>Built an <b>SQL-based KPI dashboard</b> for delivery and consignment performance, giving operations real-time visibility.</li>
+            <li>Built a data pipeline and algorithm tracking vehicle speed and traffic within a 5 km radius, <b>lifting on-time delivery 5%</b>.</li>
+            <li>Automated driver data aggregation and <b>salary calculations</b> on one platform, improving payout accuracy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="xp rv">
+        <div class="xp-side">
+          <div class="xp-org">Wheelseye Technology</div>
+          <div class="xp-dates">Dec 2020 – Jan 2023</div>
+          <div class="xp-ctx">B2B logistics</div>
+        </div>
+        <div>
+          <h3 class="xp-role">Team Leader, Operations</h3>
+          <ul>
+            <li>Led a <b>50+ member operations team</b> across partner onboarding, KYC verification and retention.</li>
+            <li>Used root-cause analysis of operational data to redesign processes, raising efficiency and <b>reducing turnaround time</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Skills ================= -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <header class="sec-head solo rv">
+        <div>
+          <p class="eyebrow">Toolkit</p>
+          <h2 class="title">What I reach for.</h2>
+        </div>
+      </header>
+      <div class="skills rv">
+        <div class="skill-row"><h3>SQL &amp; data</h3><div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">CTEs</span><span class="tag">Window functions</span><span class="tag">LATERAL joins</span><span class="tag">Query optimisation</span><span class="tag">Reconciliation queries</span></div></div>
+        <div class="skill-row"><h3>Dashboards</h3><div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Recharts</span><span class="tag">Metabase</span><span class="tag">Retool</span><span class="tag">Zoho Analytics</span><span class="tag">Advanced Excel</span><span class="tag">Google Sheets</span></div></div>
+        <div class="skill-row"><h3>Finance data</h3><div class="tags"><span class="tag">P&amp;L</span><span class="tag">COD settlements</span><span class="tag">Refunds</span><span class="tag">Commissions &amp; penalties</span><span class="tag">Ledgers &amp; pools</span><span class="tag">Invoices &amp; receivables</span></div></div>
+        <div class="skill-row"><h3>Analytics</h3><div class="tags"><span class="tag">KPI design</span><span class="tag">Funnels</span><span class="tag">Cohorts &amp; retention</span><span class="tag">Segmentation</span><span class="tag">Attribution</span><span class="tag">Root-cause analysis</span><span class="tag">Fraud &amp; anomaly detection</span></div></div>
+        <div class="skill-row"><h3>Automation</h3><div class="tags"><span class="tag">REST APIs &amp; JSON</span><span class="tag">Zoho Books API</span><span class="tag">Excel / CSV parsing</span><span class="tag">Slack webhooks</span><span class="tag">n8n</span><span class="tag">Claude Code</span><span class="tag">Claude API</span></div></div>
+        <div class="skill-row"><h3>Education</h3><div class="edu-list"><div>Bachelor of Arts (B.A.), Veer Bahadur Singh Purvanchal University<span>2016 – 2019</span></div><div>Diploma in Computer Applications (D.C.A.), Career Institute of Technology<span>2017 – 2018</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Contact ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-card rv">
+        <p class="eyebrow">Contact</p>
+        <h2 class="title">Need numbers that <em>tie out?</em></h2>
+        <p class="sec-sub">A P&amp;L that won't reconcile, or a dashboard that doesn't exist yet: I'd like to hear about it.</p>
+        <div class="contact-rows">
+          <div class="crow"><a href="mailto:chandangah@gmail.com">chandangah@gmail.com</a><button class="btn btn-sm" type="button" data-copy="chandangah@gmail.com" data-toast="Email copied"><svg width="14" height="14"><use href="#i-copy"/></svg>Copy</button></div>
+          <div class="crow"><a href="tel:+919305129200">+91 93051 29200</a><button class="btn btn-sm" type="button" data-copy="+919305129200" data-toast="Number copied"><svg width="14" height="14"><use href="#i-copy"/></svg>Copy</button></div>
+        </div>
+        <div class="contact-links">
+          <a class="btn" href="https://www.linkedin.com/in/chandan-prajapati-915568166/" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#i-in"/></svg>LinkedIn</a>
+          <a class="btn btn-primary" href="resume.html">Resume <svg width="14" height="14"><use href="#i-ext"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Chandan Prajapati · Delhi, India</span>
+    <span class="ok"><span class="dot-live"></span>Built from scratch: HTML, CSS and a little JavaScript</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="toaster" role="status" aria-live="polite"></div>
+
+<!-- ================= Command menu ================= -->
+<dialog class="cmdk" id="cmdk" aria-label="Command menu">
+  <div class="cmdk-input">
+    <svg><use href="#i-search"/></svg>
+    <input id="cmdk-q" type="text" placeholder="Jump to a project, section or action…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list">
+    <kbd>esc</kbd>
+  </div>
+  <div class="cmdk-list" id="cmdk-list" role="listbox" aria-label="Results"></div>
+  <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+</dialog>
+
+<!-- ================= Case study dialog ================= -->
+<dialog class="case" id="case" aria-labelledby="case-title">
+  <div class="case-grab" aria-hidden="true"></div>
+  <div class="case-head">
+    <div><p class="case-themes" id="case-themes"></p><h2 id="case-title"></h2></div>
+    <button class="icon-btn case-close" type="button" aria-label="Close"><svg width="16" height="16"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="case-body" id="case-body"></div>
+</dialog>
+
+<!-- ================= Case studies ================= -->
+<template id="tpl-pnl">
+  <p class="lead">Finance needed one monthly statement they could argue with line by line, and then prove. I built a per-order profit-and-loss statement where every cell opens the orders that sum to it.</p>
+  <figure class="case-viz" data-clone="pnl"><figcaption>Illustrative data · revenue indexed to 100 · the real statement has 26 columns</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Order values, delivery costs, returns, commissions and penalties lived in different tables with different dates. A month's number changed depending on who pulled it and which date they used, so month-end turned into a debate about definitions instead of the business.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li>A month-over-month statement with <b>26 columns</b>: discounts, what the buyer owes and paid, what the seller is owed, commission and penalties, delivery and RTO costs, down to net P&amp;L. Eight are derived, and each derivation is written once, in SQL.</li>
+    <li>A <b>basis switch</b> that buckets the same statement by order date, delivery date or invoice date, the three answers finance actually asks for.</li>
+    <li><b>Drill-down on every cell</b>: click any figure to get the orders behind it, with CSV export and a delivery-partner filter.</li>
+    <li>A <b>Zoho Books API client</b> (token refresh, P&amp;L report, invoices), so the books can sit beside the platform's own P&amp;L.</li>
+    <li>Bulk "orders pushed" approvals that record who approved and when, written to the audit log.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>Every cell opens the orders behind it. If a total looks wrong, the rows that caused it are one click away.</li>
+    <li>Every database connection runs in <b>IST</b>, so an order placed at 11:50 pm lands on the right day and in the right month.</li>
+    <li>The SQL behind each section is one click away: <code>&lt;/&gt;</code> shows the query, its parameters and a copy button.</li>
+  </ul>
+  <h3>By the numbers</h3>
+  <div class="metrics">
+    <div class="metric"><b>26</b><span>statement columns, 8 derived</span></div>
+    <div class="metric"><b>4 · 7</b><span>tabs · P&amp;L sub-views</span></div>
+    <div class="metric"><b>23</b><span>API routes</span></div>
+  </div>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Zoho Books API</span><span class="tag">CSV export</span></div>
+  <p class="case-foot">Chart uses synthetic data. Counts are taken from the codebase; business figures stay inside the company.</p>
+</template>
+
+<template id="tpl-cod">
+  <p class="lead">Couriers pay cash-on-delivery money back in batches, with a spreadsheet. I turned that spreadsheet into settled orders: matched, previewed, then written in one step that is safe to repeat.</p>
+  <figure class="case-viz" data-clone="cod"><figcaption>Illustrative data · one sheet, previewed · hover a row for its verdict</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Each courier sends a different sheet format. Matching thousands of rows to orders by hand meant settlement dates went missing, short payments went unnoticed, and nobody could say for sure which orders had actually been paid.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li><b>Upload and auto-detect</b>: the Excel sheet is parsed and recognised as Delhivery or Ekart from its column shape.</li>
+    <li><b>Match on AWB first, order ID second</b>, so a sheet carrying either key still reconciles.</li>
+    <li><b>Preview before write</b>: every row gets one of five verdicts (will update, already set, no match, no date, not delivered) before anything touches the database.</li>
+    <li><b>Amount checks</b>: over- or under-collection shows as a difference, and anything off by more than ₹1 counts as an amount mismatch.</li>
+    <li><b>Re-sent parcels</b> for the same order have their amounts summed and keep the latest date.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>The write runs in <b>one transaction</b>. Re-running the same sheet changes nothing: rows that are already set stay as they are.</li>
+    <li>Every apply is <b>audit-logged</b> with who ran it.</li>
+    <li><b>4,985 orders</b> were backfilled through it.</li>
+  </ul>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">Next.js</span><span class="tag">PostgreSQL</span><span class="tag">Excel parsing</span><span class="tag">Transactions</span><span class="tag">Audit log</span></div>
+  <p class="case-foot">Chart uses synthetic data. Verdicts, tolerance and formats are taken from the codebase.</p>
+</template>
+
+<template id="tpl-refund">
+  <p class="lead">Refunds are where money leaks quietly. I built the desk support uses to approve them, the tracker finance uses to chase them, and the score that shows who is abusing them.</p>
+  <figure class="case-viz" data-clone="refund"><figcaption>Illustrative data · each dot is a buyer · hover for orders, claims and claim rate</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Undelivered, damaged and partial-delivery claims were approved case by case, with no history in front of the approver. Paid orders that were later rejected or cancelled could sit unrefunded without anyone noticing.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li><b>Refund desk</b>: look up an order by number or AWB, see a LOW / MEDIUM / HIGH risk rating and the buyer's claim history, correct the quantity actually delivered, then approve a buyer refund or a seller deduction as wallet entries. The approver is recorded on the entry.</li>
+    <li><b>Refund tracker</b> for rejected or cancelled orders the buyer already paid for: refunded vs still pending, average and median refund time, CSV export, and a <b>Slack alert</b> when an order is still unrefunded 10 minutes after rejection or cancellation.</li>
+    <li><b>Claim-fraud scoring</b>: every buyer gets a 0–100 score (60% claim rate, 25% number of claims, 15% completed orders) in four risk levels, with seller and buyer drill-downs and a methodology page.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>A flag needs <b>evidence first</b>. The rules fire only after at least 6 orders and 3 claims, so a new buyer with one bad delivery isn't branded a fraud.</li>
+    <li>The weights are on the methodology page, so anyone challenging a score can see exactly how it was computed.</li>
+  </ul>
+  <h3>By the numbers</h3>
+  <div class="metrics">
+    <div class="metric"><b>4</b><span>risk levels, 4 flag rules</span></div>
+    <div class="metric"><b>7 · 4</b><span>routes: refund desk · tracker</span></div>
+    <div class="metric"><b>10 min</b><span>to an unrefunded alert</span></div>
+  </div>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Slack webhooks</span><span class="tag">CSV / Excel export</span></div>
+  <p class="case-foot">Chart uses synthetic data. Weights, thresholds and counts are taken from the codebase.</p>
+</template>
+
+<template id="tpl-ledger">
+  <p class="lead">The platform funds coupons, commissions, delivery and returns out of separate pools. I built the view that shows every rupee in and out of them, and the controls that move money between them safely.</p>
+  <figure class="case-viz" data-clone="ledger"><figcaption>Illustrative data · balances in ₹ lakh · the tick marks each pool's minimum</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Pool balances were checked by hand, a transfer could be recorded on one side only, and a pool running dry was noticed only after something failed.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li><b>Five pools</b> (coupon, commission, delivery, RTO and master) with daily money-in and money-out that drills down to individual entries, bucketed by IST day.</li>
+    <li><b>Transfers</b> that post both sides in one transaction, block double-submits and cap each transfer.</li>
+    <li>A <b>minimum-balance alarm</b>: a pool about to hit its floor blinks red.</li>
+    <li><b>Payout approvals</b>: approve or cancel one at a time, guarded so a payout that's already processed can't be flipped, with CSV export.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>Money moves in pairs: a transfer posts both entries or neither.</li>
+    <li>Transfers and approvals are <b>audit-logged</b> with who, what and which build of the code did it.</li>
+  </ul>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Transactions</span><span class="tag">Next.js</span><span class="tag">Audit log</span><span class="tag">CSV export</span></div>
+  <p class="case-foot">Chart uses synthetic data. Pools and controls are taken from the codebase.</p>
+</template>
+
+<template id="tpl-orders">
+  <p class="lead">The dashboard the platform started with: nine tabs over every order, from the monthly GMV goal down to how many days a parcel took to arrive.</p>
+  <figure class="case-viz" data-clone="tat"><figcaption>Illustrative data · share of orders by delivery speed band</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Leadership wanted one answer each morning: are we on track this month? Ops wanted another: where are deliveries slow? Both lived in ad-hoc queries.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li>A <b>monthly GMV goal gauge</b> and a target-vs-achieved table.</li>
+    <li><b>India state, district and delivery-flow maps</b>.</li>
+    <li>A <b>Delivery TAT tab</b>: p50 / p90 / p100 order-to-delivery time month over month, with the p25–p75 range shaded. A widening band means delivery consistency is slipping.</li>
+    <li><b>Six clickable speed bands</b> (0–3, 4–5, 6–7, 8–10, 11–15 and 15+ days), each opening the orders inside it.</li>
+    <li>The same TAT panel reused for the same-day JIT flow, scoped by one parameter.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>Percentiles instead of averages: one parcel stuck for a month can't drag a healthy mean, or hide inside one.</li>
+    <li>Every band opens its orders, so "slow" always comes with the list of shipments that were slow.</li>
+  </ul>
+  <h3>By the numbers</h3>
+  <div class="metrics">
+    <div class="metric"><b>9</b><span>tabs</span></div>
+    <div class="metric"><b>6</b><span>speed bands</span></div>
+    <div class="metric"><b>~47</b><span>shared API route groups</span></div>
+  </div>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Recharts</span><span class="tag">react-simple-maps</span></div>
+  <p class="case-foot">Chart uses synthetic data. Bands and counts are taken from the codebase.</p>
+</template>
+
+<template id="tpl-campaign">
+  <p class="lead">Marketing could see clicks and installs in Meta. They couldn't see which campaign produced retailers who actually ordered. I built the view that follows each campaign all the way to a delivered order.</p>
+  <figure class="case-viz" data-clone="funnel"><figcaption>Illustrative data · one campaign, as a share of its installs</figcaption></figure>
+  <h3>The problem</h3>
+  <p>Ad platforms report their own conversions. The business question, which spend turns into ordering, repeat retailers, needed our own data joined to the campaign.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li>Reads the <b>campaign ID from each install's referrer link</b> and joins it to our own buyers.</li>
+    <li>A <b>seven-stage funnel for every campaign</b>: App Installed → OTP Verified → View Content → Brand View → Add to Cart → Purchased → Delivered, each stage drillable to the buyers in it.</li>
+    <li><b>Every campaign in one query</b>, cached for 30 minutes so the page stays fast.</li>
+    <li>An acquisition view with installs → sign-up → carts → orders, and <b>install-to-first-order cohorts</b>.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>Every stage after install counts distinct, non-test buyers.</li>
+    <li>Stages aren't forced to nest (a buyer can add to cart without a brand view), so the funnel doesn't invent drop-off that didn't happen.</li>
+  </ul>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Meta install referrer</span><span class="tag">Caching</span></div>
+  <p class="case-foot">Chart uses synthetic data. Stages and caching are taken from the codebase.</p>
+</template>
+
+<template id="tpl-qps">
+  <p class="lead">A tiered loyalty scheme rewards retailers for hitting purchase targets. I built the dashboard that shows who's qualifying, who's almost there, and whether rewards actually build habits, plus an AI analyst that answers questions about it in plain English.</p>
+  <figure class="case-viz" data-clone="cohort"><figcaption>Illustrative data · share of rewarded buyers still ordering, by months since reward</figcaption></figure>
+  <h3>The problem</h3>
+  <p>The scheme team could see who qualified, but not the buyers one push away from the next tier, or whether rewarded buyers kept ordering afterwards.</p>
+  <h3>What I built</h3>
+  <ul>
+    <li><b>Near-miss buyers</b>: anyone within 25% of the next tier, ready for a nudge.</li>
+    <li><b>Retention cohorts</b> after reward, month by month, to show whether rewards built habits or one-off orders.</li>
+    <li><b>Scheme creation</b> inside the dashboard, with every gift edit logged.</li>
+    <li>An <b>AI analyst on Claude Haiku 4.5</b> that answers questions in plain English, grounded in the dashboard's own pre-computed numbers.</li>
+  </ul>
+  <h3>How it ties out</h3>
+  <ul>
+    <li>The model never queries the database. It reads the same numbers the dashboard shows, so every answer can be checked against the screen.</li>
+  </ul>
+  <h3>Stack</h3>
+  <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">Claude Haiku 4.5</span></div>
+  <p class="case-foot">Chart uses synthetic data. Thresholds and model are taken from the codebase.</p>
+</template>
+
+<script src="app.js" defer></script>
+</body>
+</html>
