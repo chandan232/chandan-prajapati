@@ -39,6 +39,6 @@ Then open http://localhost:4321.
 
 ## Deploy
 
-Live at **https://chandan232.github.io/chandan-prajapati/**, served by GitHub Pages from the root of `main` (the repo is public; `.nojekyll` skips the Jekyll pass). Every push to `main` redeploys in about a minute.
+Live at **https://chandan-prajapati.vercel.app**: the Vercel project `chandan-prajapati` in *chandan232's projects* (Hobby), linked to this repo with Framework Preset "Other". Every push to `main` redeploys. `vercel.json` turns on clean URLs (`/work?p=…`, `/resume`).
 
-All links are relative, so the site also works on any other static host, e.g. Vercel (Framework Preset "Other"), where `vercel.json` turns on clean URLs.
+A mirror runs on GitHub Pages at https://chandan232.github.io/chandan-prajapati/ (root of `main`; `.nojekyll` skips the Jekyll pass). All links are relative, so the site works on both.
