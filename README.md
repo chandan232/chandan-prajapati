@@ -39,4 +39,6 @@ Then open http://localhost:4321.
 
 ## Deploy
 
-The site deploys from GitHub (`chandan232/chandan-prajapati`) through Vercel's Git integration: Framework Preset "Other", default settings. Every push to `main` redeploys.
+Live at **https://chandan232.github.io/chandan-prajapati/**, served by GitHub Pages from the root of `main` (the repo is public; `.nojekyll` skips the Jekyll pass). Every push to `main` redeploys in about a minute.
+
+All links are relative, so the site also works on any other static host, e.g. Vercel (Framework Preset "Other"), where `vercel.json` turns on clean URLs.
