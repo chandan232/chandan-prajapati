@@ -1,6 +1,6 @@
 # Chandan Prajapati: portfolio
 
-A static site: `index.html`, `styles.css`, `app.js` and `assets/`. No build step, no framework.
+A static site: `index.html`, `resume.html`, `styles.css`, `app.js` and `favicon.svg`. No build step, no framework.
 
 ## Edit
 
